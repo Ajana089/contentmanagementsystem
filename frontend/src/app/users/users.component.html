@@ -1,0 +1,42 @@
+
+<div class="container" >
+    <div class='card'>
+        <div class='card-header'style="text-align:center;color:brown;">
+         <!-- <h3>{{title}}</h3> -->
+        </div>
+        
+        <div class='card-body' style="background-color:beige">            
+          <div class='table-responsive'>
+            <table class='table'
+                  *ngIf = 'data && data.length'>
+              <thead>
+                <tr>
+                 
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Number</th>
+                  
+                 
+                 
+                </tr>
+               
+              </thead>
+              <tbody>  
+                  <tr *ngFor='let user of data'>
+                      
+                      <td>{{ user.name }}</td>
+                      <td>{{user.email}}</td>
+                      <td>{{user.number}}</td>
+                     
+                      
+                      <td>
+                        <button class="btn btn-light" type="submit" style="cursor:pointer" (click)="editBook(user)"  > approve</button>
+                        <button class="btn btn-dark" style="cursor:pointer" (click)="deleteBook(user)" > Delete</button>
+                      </td>
+                    </tr>              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
