@@ -10,11 +10,13 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 
-// const signuprouter=require('./src/routes/singuprouter')
-// const bookrouter=require('./src/routes/bookrouter')
+const signuprouter=require('./src/routes/signuproute')
+ const adminrouter=require('./src/routes/adminrouter')
+ const userrouter=require('./src/routes/userrouter')
 
-// app.use('/user',signuprouter);
-// app.use('/books',bookrouter);
+app.use('/user',signuprouter);
+app.use('/admin',adminrouter);
+app.use('/userad',userrouter);
 
 
 

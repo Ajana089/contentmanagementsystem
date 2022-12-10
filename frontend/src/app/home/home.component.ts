@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  images = ['../../assets/cloth.jpg','../../assets/food.jpg','../../assets/home.webp'];
+  image:String="assets/new.jpg"
+  images = ['../../assets/cloth.jpg','../../assets/food.jpg','../../assets/food1.jpg'];
 
 }

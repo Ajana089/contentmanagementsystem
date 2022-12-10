@@ -16,6 +16,9 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "paths":{
+      "crypto":["node_modules/crypto-js"]
+    },
     "target": "es2020",
     "module": "es2020",
     "lib": [

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class FoodcategorylistComponent implements OnInit {
   books: any;
+  data: any;
 
   constructor(private foodservice:AddfoodserviceService,private router:Router) { }
 
@@ -18,5 +19,21 @@ export class FoodcategorylistComponent implements OnInit {
   })
 
   }
+
+  editBook(book:any)
+  {
+    localStorage.setItem("editBookId", book._id.toString());
+    this.router.navigate(['adminfoodcategoryupdate']);
+
+  }
+
+  deleteBook(book:any)
+  {
+    this.foodservice.deletecategoryadmin(book._id)
+      .subscribe((data) => {
+        this.books = this.data.filter((p:any) => p !== book)
+      })
+  
+     }
 
 }
