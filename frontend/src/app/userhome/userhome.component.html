@@ -1,60 +1,129 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <img [src]="image" alt="" style="width:500px;height:450px;">
+
+    
+    <div class="col" >
+      
+
+      <div class="col" style="width:300px;">
+        <h3>What Type of Food You Want??</h3>
+         <div class="card"
+           *ngIf = 'books && books.length'>
+           <div class="card-body" *ngFor='let book of books'>
+             <div class="row">
+             <div class="col">
+            {{book.category}}
+           </div> 
+           <div class="col">
+             <button class="btn btn-light" type="submit" style="cursor:pointer" (click)="display(book)"  style="margin-left: 20px;">
+             <div class="spinner-grow" role="status">
+             <span class="visually-hidden">Loading...</span>
+           </div>
+             </button>
+       </div>
+           </div>
+         </div>
+       </div>
+   
+   
+   
+       </div>
+         
+
+    </div>
+    <div class="col"style="width: 700px;">
+
+      <br>
+      <br>
+     <h3> Types of Food</h3>
+
+      <!-- <div class='card' style="background-color: beige;">
+        <div class='card-header'>
+         
+        </div>
+        
+        <div class='card-body'>            
+          <div class='table-responsive'>
+            <table class='table'
+                  *ngIf = 'fooddatas && fooddatas.length'>
+              <thead>
+                <tr>
+                  <th>
+                    <button class='btn btn-primary'
+                    (click)='toggleImage()'>
+                      {{showImage? 'Hide' : 'Show'}} Image
+                    </button>
+                  </th>
+                  <th>Food</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>rating</th>
+                </tr>
+               
+              </thead>
+              <tbody>  
+                  <tr *ngFor='let f of fooddatas'>
+                      <td><img *ngIf='showImage'
+                        [src] = 'f.imageurl' 
+                        [title] = 'f.food'
+                        [style.width.px] = 'imageWidth' 
+                        [style.margin.px] = 'imageMargin'></td>
+                      <td>{{ f.food }}</td>
+                      <td>{{ f.category }}</td>
+                      <td>{{ f.description }}</td>
+                      <td>{{ f.rate}}</td>
+                      <td>{{ f.rating }}</td>
+                      
+                    </tr>              
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+       -->
+
+       <div class="card" style="width: 18rem;"  *ngIf = 'fooddatas && fooddatas.length'>
+        
+        <div class="card-body"*ngFor='let f of fooddatas'>
+          <img src="f.imageurl" class="card-img-top" alt="picture of {{f.food}}">
+          <h5 class="card-title">{{f.food}}</h5>
+          <p class="card-text">It is {{ f.category }} dish.It is a {{ f.description }} type of food.It costs almost {{ f.rate}} rupees</p>
+          In rating it has {{ f.rating }}/10
+        </div>
+      </div>
+
+
+
+
 
     </div>
 
    
     
-    <div class="col">
-     <h3>What Type of Food You Want??</h3>
-      <div class="card"
-        *ngIf = 'books && books.length'>
-        <div class="card-body" *ngFor='let book of books'>
-          <div class="row">
-          <div class="col">
-         {{book.category}}
-        </div> 
-        <div class="col">
-          <button    style="cursor:pointer"   style="margin-left: 20px;"> 
-          <div class="spinner-grow" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-          </button>
-    </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    </div>
-      
+    
    
    
   </div>
 
 
     <div class="row">
-      <div class="col" style="background-color:beige;height:600px;width:10px">
 
-        <br><br><br><br>
-        
-        <a routerLink="useraddcategory">Adding foodCategory</a><br><br>
-        <a routerLink="usercatlist">foodCategory</a><br><br>
-        <a routerLink="useraddedfood">Foods</a><br><br>
-        <a routerLink="useraddedfoodlist">FoodsAvailable</a>
-       
-       
-      </div>
+      <div class="col" style="background-color:beige;height:450px;width:10px">
+
+      <br><br><br><br>
+      
+      <a routerLink="useraddcategory">Adding foodCategory</a><br><br>
+      <a routerLink="usercatlist">foodCategory</a><br><br>
+      <a routerLink="useraddedfood">Foods</a><br><br>
+      <a routerLink="useraddedfoodlist">FoodsAvailable</a>
+     
+     
+    </div>
+      
       <div class="col">
         <router-outlet></router-outlet>
       </div>
-      <div class="col">
-
-
-       
-      </div>
+      
     </div>
   </div>

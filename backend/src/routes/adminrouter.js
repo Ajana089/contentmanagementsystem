@@ -4,20 +4,23 @@ const signupdata=require('../models/signup.js');
 const adminfoodctegorydata=require('../models/adminfoodcategory')
 const adminfooddata=require('../models/adminnewfood')
 
+
+
+
 adminrouter.get('/addusers',function(req,res){
     res.header("Access-Control-Allow-Orgin","*");
     res.header('Access-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE')
     signupdata.find({"isEnrolled":false})
     .then(function(books){
         res.send(books);
-        console.log(books)
+        //console.log(books)
     });
 })
 
      adminrouter.put('/approvestudent',(req,res)=>{
-    console.log("data",req.body.isEnrolled);  
+   // console.log("data",req.body.isEnrolled);  
     id=req.body._id 
-    console.log("id="+req.body._id)
+   // console.log("id="+req.body._id)
 
    // isEnrolled=true  
  
@@ -29,16 +32,7 @@ adminrouter.get('/addusers',function(req,res){
     })
 })
 
-// adminrouter.get('/:id',(req, res) => {
 
-//     res.header("Access-Control-Allow-Orgin","*");
-//     res.header('Access-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE')
-//     const id = req.params.id;
-//       signupdata.findOne({"_id":id})
-//       .then((book)=>{
-//           res.send(book);
-//       });
-//   })
 
   adminrouter.delete('/userremove/:id',(req,res)=>{
     res.header("Access-Control-Allow-Orgin","*");
@@ -65,6 +59,22 @@ adminrouter.get('/addusers',function(req,res){
  var addbook = new adminfoodctegorydata(book);
  addbook.save();
 
+})
+
+
+adminrouter.get('/selectcategory:id',function(req,res){
+    res.header("Access-Control-Allow-Orgin","*");
+   res.header('Access-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE')
+  console.log("category"+req.params.id)
+   const category = req.params.id;
+   
+    adminfooddata.find({"category":category})
+   .then(function(books){
+     
+       res.send(books);
+
+       
+   });
 })
 
 
@@ -158,7 +168,7 @@ adminrouter.get('/adminfoods',function(req,res){
     adminfooddata.find()
     .then(function(books){
         res.send(books);
-        console.log(books)
+        //console.log(books)
     });
 })
 
@@ -208,6 +218,20 @@ adminrouter.put('/adminfoodupdate',(req,res)=>{
            res.send(book);
        });
    })
+
+
+//    adminrouter.get('/selectcategory:id',function(req,res){
+//      res.header("Access-Control-Allow-Orgin","*");
+//     res.header('Access-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE')
+//     const id = req.params.id;
+//     console.log("id"+id)
+//     // adminfoodctegorydata.find({category:req.body.c})
+//     // .then(function(books){
+//     //     res.send(books);
+        
+//     // });
+// })
+
 
 
    

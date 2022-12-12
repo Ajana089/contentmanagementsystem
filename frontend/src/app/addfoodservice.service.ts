@@ -72,12 +72,10 @@ deletefoodadmin(id:any)
      return this.http.delete("http://localhost:3000/admin/adminfoodremove/"+id)
    }
 
-  //  displaycategory(bookid:any){
+   display(id:any){
 
-  //   return this.http.get("http://localhost:3000/admin/");
-  
-
-
-  //  }
+    //console.log("category"+bookid)
+    return this.http.get("http://localhost:3000/admin/selectcategory"+id);
+   }
   
 }
