@@ -25,24 +25,19 @@ export class LoginComponent implements OnInit {
     this.loginservice.loginUser(this.userSingnup).subscribe((data)=>{
       this.loginresponse=JSON.parse(JSON.stringify(data))
       if(this.loginresponse.useradmin=="admin"){
-       
+        localStorage.setItem('token',this.loginresponse.token)
         this.router.navigate(['adminhome']);
       }
       
       
      if (this.loginresponse.users=="users")
       {
+        localStorage.setItem('token',this.loginresponse.token)
         
         this.router.navigate(['userhome'])
       }
     
-      //alert("waiting for admin approval after registration")
-      // else{
-
-      //   this.router.navigate(['userhome'])
-
-      // }
-    // },
+      
 
     });
    

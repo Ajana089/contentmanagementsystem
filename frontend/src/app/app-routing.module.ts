@@ -12,6 +12,7 @@ import { FoodcategorylistComponent } from './foodcategorylist/foodcategorylist.c
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AuthGuard } from './auth.guard';
 import { UpdateusersComponent } from './updateusers/updateusers.component';
 import { UseraddedcategoryComponent } from './useraddedcategory/useraddedcategory.component';
 import { UseraddedfoodlistComponent } from './useraddedfoodlist/useraddedfoodlist.component';
@@ -26,7 +27,7 @@ import { UsersComponent } from './users/users.component';
 const routes: Routes = [{path:'',component:HomeComponent},
 {path:'signup',component:SignupComponent},
 {path:'login',component:LoginComponent},
-{path:'userhome',component:UserhomeComponent,
+{path:'userhome',canActivate:[AuthGuard],component:UserhomeComponent,
 children:[{path:'useraddcategory',component:UseraddedcategoryComponent},{
   path:'usercatlist',component:UsercategorylistComponent},
   {path:'useraddedfood',component:UseraddedfoodsComponent},
@@ -40,11 +41,13 @@ children:[{path:'useraddcategory',component:UseraddedcategoryComponent},{
 {path:'useradminhome',component:UseradminhomeComponent},
 {path:'adminfoodupdate',component:AdminfoodupdateComponent},
 {path:'adminfoodcategoryupdate',component:AdminfoodcategoryupdateComponent},
-{path:'adminhome',component:AdminhomeComponent,
+{path:'adminhome',
+
+component:AdminhomeComponent,canActivate:[AuthGuard],
 children:[{path:'Regusers',component:UsersComponent},
 {path:'adminhomepic',component:AdminpicComponent},
 {path:'food',component:AddfoodsComponent},
-{path:'adminaddedfood',component:AdminadedfoodsComponent},
+{path:'adminaddedfood',canActivate:[AuthGuard],component:AdminadedfoodsComponent},
 {path:'categorylist',component:FoodcategorylistComponent},
 {path:'adminaddedfoodlist',component:AdminfoodlistsComponent}
 ]},

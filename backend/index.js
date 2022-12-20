@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+const jwt=require('jsonwebtoken')
 const bodyParser=require('body-parser');//added bodyparser 
 const cors = require('cors');
 const bcrypt=require('bcrypt');

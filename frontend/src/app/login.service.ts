@@ -73,9 +73,7 @@ getUserId(id:any){
 }
 
 
-// getBookId(id:any){
-//   return this.http.get("https://backendlibrary12345.herokuapp.com/books/"+id);
-// }
+
 
 editBook(book:any)
 {
@@ -83,6 +81,24 @@ editBook(book:any)
   return this.http.put("http://localhost:3000/admin/approvestudent",book)
   .subscribe(data =>{console.log(data)})
 }
+
+
+loggedIn(){
+  return !!localStorage.getItem('token')
+}
+
+getToken(){
+  return !!localStorage.getItem('token')
+}
+
+logoutuser(){
+  alert("logout")
+  localStorage.clear();
+  localStorage.removeItem("token")
+  console.log("token"+'token');
+  this.router.navigate([''])
+}
+
 
   }
   

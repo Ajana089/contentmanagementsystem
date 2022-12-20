@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import {HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,9 @@ import { UseraddedfoodlistComponent } from './useraddedfoodlist/useraddedfoodlis
 import { UserfoodupdateComponent } from './userfoodupdate/userfoodupdate.component';
 import { AdminpicComponent } from './adminpic/adminpic.component';
 import { UseradminhomeComponent } from './useradminhome/useradminhome.component';
+import { TokenIntercepterService } from './token-intercepter.service';
+import { UserhomeserviceService } from './userhomeservice.service';
+import { LoginService } from './login.service';
 
 
 @NgModule({
@@ -68,9 +72,14 @@ import { UseradminhomeComponent } from './useradminhome/useradminhome.component'
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [UserhomeserviceService,AuthGuard,LoginService,{
+ provide:HTTP_INTERCEPTORS,
+ useClass:TokenIntercepterService,
+ multi:true
+
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

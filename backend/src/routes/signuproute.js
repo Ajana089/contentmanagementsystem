@@ -2,39 +2,31 @@ const express = require('express');
 const signuprouter=express.Router();
 const signupdata=require('../models/signup.js')
 const bcrypt=require('bcrypt');//to encrypt password
-
+const jwt=require('jsonwebtoken')
 ademail='admin@gmail.com'
 adpassword='admin123'
 user="admin"
+ function verifyToken(req,res,next){
+
+if(!req.headers.authorization){
+    return res.status(401).send('Unauthorized request');
+}
+let token=req.headers.authorization.split('')[1]
+if(token==='null'){
+    return res.status(401).send('Unauthorized request');
+}
+    let payload=jwt.verify(token,'secretkey')
+    if(!payload){
+        return res.status(401).send('Unauthorized request');
+    }
+    req.userId=payload.subject
+    next();
+
+ }
 
 
 
 
-//     signuprouter.post('/signup',(req,res)=>{
-
-       
-    
-//             res.header("Access-Control-Allow-Orgin","*");
-//             res.header('Access-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE')
-
-//               var user={
-//                 name: req.body.name,
-//                 email: req.body.email,
-//                 password:req.body.password,
-//                 number: req.body.number,
-//                 qualification: req.body.qualification,
-//                 specialisation: req.body.specialisation,
-//                 isEnrolled: req.body.isEnrolled,
-//                 gender:req.body.gender,
-//                 user:req.body.user,
-                   
-//                 }
-//                 const usersign = new signupdata(user);
-//                 usersign.save()
-           
-        
-            
-// })
 signuprouter.post('/signup',async (req,res)=>{
 
     try{
@@ -102,8 +94,11 @@ signuprouter.post('/login',(req,res)=>{
     res.header('Access-Control-Allow-Methods:GET,POST,PATCH,PUT,DELETE')
 
     if(req.body.email==="admin@gmail.com"&&req.body.password==="admin123")
-    {
-        return res.status(200).json({success:true,message:"Sucessful login",useradmin:"admin"})
+    {   
+        let payload={subject:"req.body.email"+"req.body.password"}
+        let token=jwt.sign(payload,'secretkey')
+        console.log(token);
+        return res.status(200).json({success:true,message:"Sucessful login",useradmin:"admin",token})
 
     }
 
@@ -134,11 +129,9 @@ signuprouter.post('/login',(req,res)=>{
            bcrypt.compare(req.body.password,user1.password,(err,ret)=>{
             if(ret){
 
-                //return res.status(200).json({success:true,message:"Sucessful login",name:result[0].name, user:result[0].user,token})
-              
-                //return res.status(200).json({success:true,message:"you are succcessfully login"})
-                console.log("users"+user1.users)
-              return res.status(200).json({success:true,message:"Sucessful login",users:user1.users})
+             let payload={subject:user1+user1.password}
+             let token=jwt.sign(payload,'secretkey')
+              return res.status(200).json({success:true,message:"Sucessful login",users:user1.users,token})
 
             }
             else{
